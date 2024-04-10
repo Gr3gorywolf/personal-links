@@ -9,4 +9,4 @@ services:
       - .:/usr/src/app
     ports:
       - "3000:3456"
-    command: sh -c "npm install && npm migrate && npm run build && pm2-runtime start npm --name 'nextjs-app' -- start"
+    command: sh -c "npm install && npm run migrate && npm run build && pm2-runtime start npm --name 'nextjs-app' -- start"
