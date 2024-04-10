@@ -22,9 +22,4 @@ jobs:
             source ~/.nvm/nvm.sh
             cd /var/www/html/personal-links
             git pull origin main
-            nvm use 20.10.0
-            npm install
-            npm run migrate
-            npm run build
-            pm2 stop personal-links
-            pm2 start "npm run start" --name "personal-links" --interpreter=~/.nvm/versions/node/v20.10.0/bin/node
+            docker  compose up --force-recreate
