@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" >
       <Head>
         <link
           rel="stylesheet"
@@ -10,7 +10,7 @@ export default function Document() {
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         />
       </Head>
-      <body className="bg-orange-400">
+      <body className='bg-orange-400'  >
         <Main />
         <NextScript />
       </body>

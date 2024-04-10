@@ -14,6 +14,12 @@ import {
 import { moreInfoStyles } from './MoreInfoStyles'
 import { FC } from 'react'
 import Image from 'next/image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faDownload,
+  faInfo,
+  faInfoCircle,
+} from '@fortawesome/free-solid-svg-icons'
 
 export const MoreInfo: FC<{
   serverTime: number
@@ -24,12 +30,19 @@ export const MoreInfo: FC<{
     var ageDate = new Date(ageDifMs)
     return Math.abs(ageDate.getUTCFullYear() - 1970)
   }
-  const handleDownloadResume = () =>{
-        window.open("https://gregoryc.dev/assets/Gregory%20Cabral.pdf");
+  const handleDownloadResume = () => {
+    window.open('https://gregoryc.dev/assets/Gregory%20Cabral.pdf')
   }
   return (
     <AlertDialog>
-      <AlertDialogTrigger className='font-bold'>View more</AlertDialogTrigger>
+      <AlertDialogTrigger className="font-bold">
+        {' '}
+        <FontAwesomeIcon
+          icon={faInfoCircle}
+          fontSize="35"
+          className="px-5 text-white"
+        />
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>About me</AlertDialogTitle>
@@ -66,8 +79,15 @@ export const MoreInfo: FC<{
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-        <AlertDialogCancel onClick={handleDownloadResume}>Download resume</AlertDialogCancel>
-          <AlertDialogAction>Close</AlertDialogAction>
+          <AlertDialogCancel >Close</AlertDialogCancel>
+          <AlertDialogAction  onClick={handleDownloadResume}>
+            <FontAwesomeIcon
+              icon={faDownload}
+              fontSize="16"
+              className="px-2 text-white"
+            />{' '}
+            Download resume
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
