@@ -4,7 +4,6 @@ services:
   nextjs-app:
     image: node:20-alpine
     container_name: gr3-links-container
-    working_dir: ./
     volumes:
       - .:/usr/src/app
     ports:
