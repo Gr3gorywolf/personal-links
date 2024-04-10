@@ -31,9 +31,7 @@ jobs:
         username: ${{ secrets.VPS_USERNAME }}
         password: ${{ secrets.VPS_PASSWORD }}
         source: ".next"
-        overwrite: true
-        rm: true
-        target: "${{ secrets.TARGET_PATH }}/.next"
+        target: "${{ secrets.TARGET_PATH }}"
     - name: Deploy to VPS
       uses: appleboy/ssh-action@master
       with:
