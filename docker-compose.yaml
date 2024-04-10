@@ -8,5 +8,5 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - "3000:3456"
-    command: sh -c "npm install && npm run migrate && npm run build && pm2-runtime start npm --name 'nextjs-app' -- start"
+      - "3456:3456"
+    command: sh -c "npm run migrate && pm2-runtime start npm --name=personal-links -- start"

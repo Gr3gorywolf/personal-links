@@ -10,45 +10,39 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js 20.10
-      uses: actions/setup-node@v2
-      with:
-        node-version: 20.10.0
+      - name: Use Node.js 20.10
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.10.0
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Next.js app
-      run: npm run build
+      - name: Build Next.js app
+        run: npm run build
 
-    - name: Copy files to VPS
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        source: ".next"
-        target: "${{ secrets.TARGET_PATH }}"
-    - name: Deploy to VPS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: 22
-        script: |
-          export NVM_DIR=~/.nvm
-          source ~/.nvm/nvm.sh
-          cd ${{ secrets.TARGET_PATH}}
-          git pull origin main
-          nvm use 20.10.0
-          npm run migrate
-          pm2 start npm --name="personal-links" -- start
-    - uses: actions/upload-artifact@v3
-      with:
-        name: output
-        path: ./.next
-      
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: ".next"
+          rm: true
+          target: "${{ secrets.TARGET_PATH }}"
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            cd ${{ secrets.TARGET_PATH}}
+            git pull origin main
+            docker-compose up --force-recreate
+            nvm use 20.10.0
+            pm2 start npm --name="personal-links" -- start
