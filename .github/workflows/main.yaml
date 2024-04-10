@@ -49,3 +49,8 @@ jobs:
           nvm use 20.10.0
           npm run migrate
           pm2 start npm --name="personal-links" -- start
+    - uses: actions/upload-artifact@v3
+      with:
+        name: output
+        path: ./
+      
