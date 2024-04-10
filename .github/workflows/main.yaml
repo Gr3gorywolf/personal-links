@@ -10,16 +10,40 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     steps:
-      - name: Deploy to VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          port: 22
-          script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            cd /var/www/html/personal-links
-            git pull origin main
-            docker-compose up -d --force-recreate
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js 20.10
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20.10.0
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build Next.js app
+      run: npm run build
+
+    - name: Copy files to VPS
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        source: "./.next/*"
+        target: "${{ secrets.TARGET_PATH }}/.next"
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: 22
+        script: |
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          cd ${{ secrets.TARGET_PATH}}
+          git pull origin main
+          nvm use 20.10.0
+          npm run migrate
+          pm2 start npm --name="personal-links" -- start
