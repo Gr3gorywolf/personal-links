@@ -30,7 +30,7 @@ jobs:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USERNAME }}
         password: ${{ secrets.VPS_PASSWORD }}
-        source: "./.next/*"
+        source: ".next/*"
         overwrite: true
         rm: true
         target: "${{ secrets.TARGET_PATH }}/.next"
