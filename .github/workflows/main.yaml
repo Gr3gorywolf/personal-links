@@ -52,4 +52,5 @@ jobs:
           port: 22
           script: |
             cd ${{ secrets.TARGET_PATH}}
-            docker-compose up --force-recreate
+            docker-compose up -d --force-recreate
+            docker-compose logs
