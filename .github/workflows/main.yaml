@@ -55,4 +55,5 @@ jobs:
             source ~/.nvm/nvm.sh
             cd ${{ secrets.TARGET_PATH}}
             nvm use 20.10.0
+            npm run migrate
             pm2 delete personal-links 2> /dev/null || true && pm2 start npm --name=personal-links -- start
