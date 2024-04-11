@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           source: ".next"
           target: "${{ secrets.TARGET_PATH }}"
-      - name: Run docker
+      - name: Start nextjs app
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -52,4 +52,4 @@ jobs:
           port: 22
           script: |
             cd ${{ secrets.TARGET_PATH}}
-            docker-compose up -d --force-recreate
+            pm2 delete personal-links 2> /dev/null || true && pm2 start npm --name=personal-links -- start
