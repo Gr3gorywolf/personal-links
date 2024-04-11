@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           source: ".next"
           rm: true
-          target: "${{ secrets.TARGET_PATH }}"
+          target: "${{ secrets.TARGET_PATH }}/.next"
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
