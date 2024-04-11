@@ -34,7 +34,7 @@ jobs:
           script: |
             cd ${{ secrets.TARGET_PATH}}
             git pull
-            [ -e .next ] &&  rm -r .next
+            rm -rf .next || true
       - name: Copy files to VPS
         uses: appleboy/scp-action@master
         with:
