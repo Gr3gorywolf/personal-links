@@ -42,8 +42,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           source: ".next"
-          rm: true
-          target: "${{ secrets.TARGET_PATH }}/.next"
+          target: "${{ secrets.TARGET_PATH }}"
       - name: Run docker
         uses: appleboy/ssh-action@master
         with:
