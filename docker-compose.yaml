@@ -9,4 +9,4 @@ services:
       - .:/usr/src/app
     ports:
       - "3456:3456"
-    command: sh -c "npm run migrate && pm2-runtime start npm --name=personal-links -- start"
+    command: sh -c "npm install -g pm2  && npm run migrate && pm2 start npm --name=personal-links -- start"
