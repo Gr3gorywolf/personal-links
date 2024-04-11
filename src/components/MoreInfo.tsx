@@ -49,6 +49,7 @@ export const MoreInfo: FC<{
           <AlertDialogDescription className={moreInfoStyles}>
             <Image
               alt="gregory's picture"
+              loading='eager'
               className="object-cover rounded-xl mx-auto mb-3"
               src="/images/profile.jpg"
               height={700}
