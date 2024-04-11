@@ -50,7 +50,7 @@ export const MoreInfo: FC<{
             <Image
               alt="gregory's picture"
               className="object-cover rounded-xl mx-auto mb-3"
-              src="https://gregoryc.dev/assets/img/profile.jpg"
+              src="/images/profile.jpg"
               height={700}
               width={700}
             ></Image>

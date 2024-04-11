@@ -1,12 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { SocialLinks } from '@/data/socialLinks'
 import { LinkCard } from '@/components/LinkCard'
 import { Character } from '../components/Character'
 import { InsertVisit } from '@/db/visits'
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import type { InferGetServerSidePropsType, GetServerSideProps, Metadata } from 'next'
 import { MoreInfo } from '@/components/MoreInfo'
-
+import Head from 'next/head'
 export const getServerSideProps = (async ({req})=>{
   const referrer = req.headers.referer;
   const serverTime = new Date().getTime();
@@ -16,6 +17,10 @@ export const getServerSideProps = (async ({req})=>{
 
 export default function Home({serverTime}: InferGetServerSidePropsType<typeof getServerSideProps>){
   return (
+    <>
+     <Head>
+        <title>Gregory's links</title>
+      </Head>
     <div className="w-full ">
       <div className='fixed right-5 top-5'>
       <MoreInfo serverTime={serverTime}/>
@@ -38,6 +43,7 @@ export default function Home({serverTime}: InferGetServerSidePropsType<typeof ge
         </div>
       </div>
     </div>
+    </>
   )
 }
 
