@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 import { css } from '@emotion/css'
 import {
@@ -47,14 +48,13 @@ export const MoreInfo: FC<{
         <AlertDialogHeader>
           <AlertDialogTitle>About me</AlertDialogTitle>
           <AlertDialogDescription className={moreInfoStyles}>
-            <Image
+            <img
               alt="gregory's picture"
-              loading='eager'
               className="object-cover rounded-xl mx-auto mb-3"
               src="/images/profile.jpg"
               height={700}
               width={700}
-            ></Image>
+            />
             <h4>
               I'm <strong> Gregory Alexander Cabral De Los Santos</strong>
             </h4>
